@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.activity.LyricinfoActivity">
+
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedscrollview"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:id="@+id/toolbar_layout"
+                android:layout_width="match_parent"
+                android:layout_height="280dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/backimg"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:alpha="0.7"
+                    android:scaleType="centerCrop" />
+
+                <ImageView
+                    android:id="@+id/coverimg"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_gravity="bottom"
+                    android:layout_margin="12dp"
+                    android:scaleType="centerCrop" />
+
+                <TextView
+                    android:id="@+id/sname_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_marginLeft="127dp"
+                    android:layout_marginBottom="80dp"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/lname_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_marginLeft="127dp"
+                    android:layout_marginBottom="15dp"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:textSize="14sp" />
+
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+            <com.lb.learnsong.ui.selectetextview.SelectableTextView
+                android:id="@+id/lyrics_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/text_margin"
+                android:lineSpacingExtra="6dp"
+                android:textColor="@color/title_gray"
+                android:textSize="14sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/lyrics_collect"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/collect_icon_selecter" />
+
+                <TextView
+                    android:id="@+id/lyrics_collectcount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:textColor="@color/title_black"
+                    android:textSize="10sp" />
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/comment_recyclerview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="20dp" />
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+    <ImageView
+        android:id="@+id/topback"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toLeftOf="parent"
+        android:layout_width="match_parent"
+        android:scaleType="centerCrop"
+        android:layout_height="48dp"/>
+    <com.lb.learnsong.ui.lsview.BackView
+        android:id="@+id/back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+    </com.lb.learnsong.ui.lsview.BackView>
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:gravity="center"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:textColor="@color/title_black"
+        android:maxLines="1"
+        android:ellipsize="end"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" >
+        <requestFocus/>
+    </TextView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="20dp"
+        android:clickable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:srcCompat="@android:drawable/ic_dialog_email" />
+
+    <include
+        android:id="@+id/sendlayout"
+        layout="@layout/comment_sendview"
+        android:layout_width="match_parent"
+        android:layout_height="51dp"
+        android:layout_gravity="bottom"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

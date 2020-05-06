@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.lb.learnsong">
+
+    <uses-permission android:name="android.permission.INTERNET" /> <!-- 拍照 -->
+    <uses-permission android:name="android.permission.CAMERA" /> <!-- 写入SD卡的权限：如果你希望保存相机拍照后的照片 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!-- 读取SD卡的权限:打开相册选取图片所必须的权限 -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+
+    <application
+        android:name=".LsApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:networkSecurityConfig="@xml/networksecurityconfig"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".ui.activity.AddSongActivity"></activity>
+        <activity
+            android:name=".ui.activity.ReportActivity"
+            android:label="@string/title_activity_report"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ui.activity.LyricinfoActivity"
+            android:label="@string/title_activity_lyricinfo"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".ui.activity.LyricsInfoActivity" />
+        <activity android:name=".ui.notifications.UserInfoActivity" />
+        <activity
+            android:name=".ui.activity.ui.login.LoginActivity"
+            android:label="@string/title_activity_login" />
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.activity.SignUpActivity"
+            android:label="注册" />
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.lb.learnsong.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+    </application>
+
+</manifest>

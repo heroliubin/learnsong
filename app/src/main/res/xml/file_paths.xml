@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <external-path
+        name="images"
+        path="learnsong" />
+    <external-path
+        name="update"
+        path="learnsong" />
+</resources>

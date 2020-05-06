@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/ll_root"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="10dp">
+
+    <ImageView
+        android:id="@+id/home_item_img"
+        android:layout_width="46dp"
+        android:layout_height="46dp"
+        android:layout_marginLeft="20dp"
+        android:scaleType="centerCrop"
+
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/home_item_lname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="16dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textColor="@color/title_black"
+        android:textSize="16sp"
+        app:layout_constraintLeft_toRightOf="@+id/home_item_img"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/home_item_sname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="16dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textColor="@color/title_gray"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/home_item_img"
+        app:layout_constraintStart_toEndOf="@+id/home_item_img"
+        app:layout_constraintTop_toBottomOf="@+id/home_item_lname" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginLeft="14dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/title_divide"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/home_item_img" />
+</androidx.constraintlayout.widget.ConstraintLayout>

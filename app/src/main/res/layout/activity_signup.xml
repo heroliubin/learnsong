@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/screen"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="11dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="我们需要验证您的手机号码,该号码不对其他人公开"
+                android:textColor="#c2c2c2"
+                android:textSize="12dp"
+                android:visibility="gone" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="64dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+
+                <EditText
+                    android:id="@+id/account_phone"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    android:hint="邮箱"
+                    android:inputType="textEmailAddress"
+                    android:maxLines="1"
+                    android:textColor="@color/realblack"
+                    android:textColorHint="@color/sign_hint"
+                    android:textSize="15sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1px"
+            android:background="@color/divide_gray" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="64dp"
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <EditText
+                android:inputType="textPassword"
+                android:id="@+id/code_et"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:hint="请输入验证码"
+                android:maxLength="10"
+                android:maxLines="1"
+                android:textColor="@color/realblack"
+                android:textColorHint="@color/sign_hint"
+                android:textSize="15dp" />
+
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="right|center_vertical"
+
+                android:orientation="horizontal">
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="16dp"
+                    android:background="@color/sign_hint" />
+
+                <Button
+                    android:id="@+id/verify_bt"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:background="@null"
+                    android:maxLines="1"
+                    android:text="获取验证码"
+                    android:textColor="@color/bindcode_selecter"
+                    android:textSize="16dp" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1px"
+            android:background="@color/divide_gray" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="64dp"
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+                <EditText
+                    android:id="@+id/account_pwd"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_marginRight="60dp"
+                    android:background="@null"
+                    android:hint="请输入密码(至少6位)"
+                    android:inputType="textPassword"
+                    android:maxLines="1"
+                    android:textColor="@color/realblack"
+                    android:textColorHint="@color/sign_hint"
+                    android:textSize="15dp" />
+
+                <LinearLayout
+                    android:id="@+id/seepswll"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right|center_vertical"
+                    android:clickable="true">
+
+                    <ImageView
+                        android:id="@+id/seepsw"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:padding="5dp"
+                        android:src="@mipmap/seepsw" />
+                </LinearLayout>
+            </FrameLayout>
+        </LinearLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1px"
+            android:background="@color/divide_gray" />
+
+        <TextView
+            android:id="@+id/sign_up"
+            android:layout_width="fill_parent"
+            android:layout_height="45dp"
+            android:layout_marginTop="46dp"
+            android:background="@drawable/round_btn_selectotr"
+            android:gravity="center"
+            android:text="注册"
+            android:textColor="@color/sign_btn"
+            android:textSize="17dp" />
+
+        <TextView
+            android:id="@+id/go_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="25dp"
+            android:gravity="center_vertical"
+            android:text="已有账号?  去登录"
+            android:textColor="@color/realblack"
+            android:textSize="12dp" />
+
+        <LinearLayout
+            android:id="@+id/go_pact_ll"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="23dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="注册即表示同意"
+                android:textColor="@color/realblack"
+                android:textSize="12dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="《用户许可协议》"
+                android:textColor="#666666"
+                android:textSize="12dp" />
+        </LinearLayout>
+    </LinearLayout>
+
+</ScrollView>

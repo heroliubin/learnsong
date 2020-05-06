@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/user_notify"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/userfragment_txheight"
+        android:layout_marginTop="40dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:visibility="visible"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/userfragment_marginleft"
+            android:drawableLeft="@mipmap/icon_my_record"
+            android:drawablePadding="@dimen/userfragment_drawpading"
+            android:gravity="center"
+            android:text="我的通知"
+            android:textColor="@color/title_black"
+            android:textSize="@dimen/userfragment_14"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/userfragment_marginright"
+            android:drawableRight="@mipmap/icon_right" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/user_release"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/userfragment_txheight"
+        android:layout_marginTop="40dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:visibility="visible"
+        app:layout_constraintTop_toTopOf="@+id/user_notify">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/userfragment_marginleft"
+            android:drawableLeft="@mipmap/icon_my_record"
+            android:drawablePadding="@dimen/userfragment_drawpading"
+            android:gravity="center"
+            android:text="我的发布"
+            android:textColor="@color/title_black"
+            android:textSize="@dimen/userfragment_14"
+             />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/userfragment_marginright"
+            android:drawableRight="@mipmap/icon_right" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/user_problem"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/userfragment_txheight"
+        android:layout_marginTop="40dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:visibility="visible"
+        app:layout_constraintTop_toTopOf="@+id/user_release">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/userfragment_marginleft"
+            android:drawableLeft="@mipmap/icon_my_record"
+            android:drawablePadding="@dimen/userfragment_drawpading"
+            android:gravity="center"
+            android:text="问题反馈"
+            android:textColor="@color/title_black"
+            android:textSize="@dimen/userfragment_14"
+             />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/userfragment_marginright"
+            android:drawableRight="@mipmap/icon_right" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/user_points"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/userfragment_txheight"
+        android:layout_marginTop="40dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:visibility="visible"
+        app:layout_constraintTop_toTopOf="@+id/user_problem">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/userfragment_marginleft"
+            android:drawableLeft="@mipmap/icon_my_record"
+            android:drawablePadding="@dimen/userfragment_drawpading"
+            android:gravity="center"
+            android:text="我的积分"
+            android:textColor="@color/title_black"
+            android:textSize="@dimen/userfragment_14"
+             />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/userfragment_marginright"
+            android:drawableRight="@mipmap/icon_right" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/user_chat"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/userfragment_txheight"
+        android:layout_marginTop="40dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:visibility="visible"
+        app:layout_constraintTop_toTopOf="@+id/user_points">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/userfragment_marginleft"
+            android:drawableLeft="@mipmap/icon_my_record"
+            android:drawablePadding="@dimen/userfragment_drawpading"
+            android:gravity="center"
+            android:text="官方群聊"
+            android:textColor="@color/title_black"
+            android:textSize="@dimen/userfragment_14"
+             />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/userfragment_marginright"
+            android:drawableRight="@mipmap/icon_right" />
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

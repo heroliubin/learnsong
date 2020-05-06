@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_home">
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.lb.learnsong.ui.home.HomeFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/navigation_collect"
+        android:name="com.lb.learnsong.ui.collect.CollectFragment"
+        android:label="@string/title_collect"
+        tools:layout="@layout/collect_fragment" />
+    <fragment
+        android:id="@+id/navigation_dashboard"
+        android:name="com.lb.learnsong.ui.wordlib.WordlibFragment"
+        android:label="@string/title_wordlib"
+        tools:layout="@layout/fragment_dashboard" />
+
+    <fragment
+        android:id="@+id/navigation_notifications"
+        android:name="com.lb.learnsong.ui.notifications.NotificationsFragment"
+        android:label="@string/title_notifications"
+        tools:layout="@layout/fragment_notifications" />
+</navigation>
