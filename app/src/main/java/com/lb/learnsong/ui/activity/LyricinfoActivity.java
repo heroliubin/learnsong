@@ -4,7 +4,9 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.text.method.LinkMovementMethod;
 import android.view.View;
@@ -16,12 +18,15 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.MainThread;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.widget.NestedScrollView;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.palette.graphics.Palette;
@@ -46,9 +51,25 @@ import com.lb.learnsong.ui.selectetextview.OnWordClickListener;
 import com.lb.learnsong.ui.selectetextview.SelectableTextView;
 import com.lb.learnsong.ui.viewmodel.CommentViewModel;
 import com.lb.learnsong.ui.viewmodel.LyricsViewModel;
+import com.lb.learnsong.ui.youdao.AudioMgr;
+import com.lb.learnsong.ui.youdao.AuditRecorderConfiguration;
+import com.lb.learnsong.ui.youdao.ExtAudioRecorder;
+import com.lb.learnsong.ui.youdao.TranslateData;
+import com.lb.learnsong.uiUtil.LogUtils;
 import com.lb.learnsong.uiUtil.NullUtils;
 import com.lb.learnsong.uiUtil.ScreenUtil;
+import com.youdao.sdk.app.Language;
+import com.youdao.sdk.app.LanguageUtils;
+import com.youdao.sdk.common.Constants;
+import com.youdao.sdk.common.YouDaoLog;
+import com.youdao.sdk.ydonlinetranslate.Translator;
+import com.youdao.sdk.ydtranslate.Translate;
+import com.youdao.sdk.ydtranslate.TranslateErrorCode;
+import com.youdao.sdk.ydtranslate.TranslateListener;
+import com.youdao.sdk.ydtranslate.TranslateParameters;
+import com.youdao.sdk.ydtranslate.WebExplain;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -105,14 +126,15 @@ public class LyricinfoActivity extends BaseLsActivity {
     private CommentAdapter adapter;
     private AlertDialog dialog = null;
     private View view1;
-    private ImageView voice, collect;
-
+    private LinearLayout voice, collect;
+    ExtAudioRecorder recorder;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lyricinfo);
         ButterKnife.bind(this);
         init();
+
         commentViewModel.getCommentlist().observe(this, commentInfoBaseListBean -> {
             adapter = new CommentAdapter(commentInfoBaseListBean.getList(), this);
             commentRecyclerview.setAdapter(adapter);
@@ -209,11 +231,12 @@ public class LyricinfoActivity extends BaseLsActivity {
         });
         viewModel.getPraisresult().observe(this, baseBean -> makeToast(baseBean.msg));
     }
-
+    private File audioFile;
     @OnClick({R.id.voicesendimg, R.id.sendmsg, R.id.msgcontent_ed, R.id.lyrics_collect, R.id.back})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.voicesendimg:
+                record(view);
                 break;
             case R.id.sendmsg:
                 if (sendmsg.isSelected()) {
@@ -327,8 +350,9 @@ public class LyricinfoActivity extends BaseLsActivity {
         selectableTextView.setOnWordClickListener(new OnWordClickListener() {
             @Override
             protected void onNoDoubleClick(String word) {
-//                Toast.makeText(LyricinfoActivity.this, word, Toast.LENGTH_SHORT).show();
+
                 viewModel.loadwordinfo(getToken(), word);
+
             }
         });
     }
@@ -353,16 +377,8 @@ public class LyricinfoActivity extends BaseLsActivity {
 
         }
         voice.setOnClickListener(v -> {
-            if (NullUtils.isNotEmpty(wordInfoBaseBeantoobj.obj.getVoicefileurl())) {
-                MediaPlayer mediaPlayer = new MediaPlayer();
-                try {
-                    mediaPlayer.setDataSource(wordInfoBaseBeantoobj.obj.getVoicefileurl());
-                    mediaPlayer.prepareAsync();
-                    mediaPlayer.start();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
+            playVoice(wordInfoBaseBeantoobj.obj.getVoicefileurl());
+
         });
         collect.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -384,6 +400,38 @@ public class LyricinfoActivity extends BaseLsActivity {
         view1.findViewById(R.id.wordll).setLayoutParams(params);
         dialogWindow.setAttributes(lp);
     }
+    public synchronized void playVoice(String speakUrl) {
 
+        if (NullUtils.isNotEmpty(speakUrl) && speakUrl.startsWith("http")) {
 
+            AudioMgr.startPlayVoice(speakUrl, new AudioMgr.SuccessListener() {
+                @Override
+                public void success() {
+
+                }
+
+                @Override
+                public void playover() {
+
+                }
+            });
+        }else {
+            makeToast("发音地址错误");
+        }
+    }
+    public void record(View view) {
+
+    }
+
+    Handler handler=new Handler();
+    ExtAudioRecorder.RecorderListener listener = new ExtAudioRecorder.RecorderListener() {
+        @Override
+        public void recordFailed(int failRecorder) {
+            if (failRecorder == 0) {
+                Toast.makeText(LyricinfoActivity.this, "录音失败，可能是没有给权限", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(LyricinfoActivity.this, "发生了未知错误", Toast.LENGTH_SHORT).show();
+            }
+        }
+    };
 }

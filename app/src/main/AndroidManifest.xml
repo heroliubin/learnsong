@@ -7,7 +7,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!-- 读取SD卡的权限:打开相册选取图片所必须的权限 -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <application
         android:name=".LsApplication"
         android:allowBackup="true"
@@ -26,7 +26,7 @@
             android:name=".ui.activity.LyricinfoActivity"
             android:label="@string/title_activity_lyricinfo"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".ui.activity.LyricsInfoActivity" />
+
         <activity android:name=".ui.notifications.UserInfoActivity" />
         <activity
             android:name=".ui.activity.ui.login.LoginActivity"
@@ -53,6 +53,7 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
+        <service android:name="com.zlw.main.recorderlib.recorder.RecordService" />
     </application>
 
 </manifest>

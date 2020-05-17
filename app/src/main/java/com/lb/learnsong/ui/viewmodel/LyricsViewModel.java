@@ -10,6 +10,7 @@ import com.lb.learnsong.bean.CommentInfo;
 import com.lb.learnsong.bean.LyricsInfo;
 import com.lb.learnsong.bean.WordInfo;
 import com.lb.learnsong.http.HttpHelper;
+import com.lb.learnsong.ui.youdao.TranslateData;
 import com.lb.learnsong.uiUtil.LogUtils;
 import com.youdao.sdk.app.Language;
 import com.youdao.sdk.app.LanguageUtils;
@@ -149,13 +150,21 @@ public class LyricsViewModel extends BaseViewModel {
 
             @Override
             public void onResult(Translate translate, String s, String s1) {
-                LogUtils.LOGM(translate.toString());
-                WordInfo words = new WordInfo(word,"发音:"+translate.getUsPhonetic(),"翻译结果:"+translate.getTranslations().toString(),
-                        translate.getUSSpeakUrl(),"");
+                TranslateData td = new TranslateData(
+                        System.currentTimeMillis(), translate);
+
+//                LogUtils.LOGM("翻译结果：\n" + td.translates());
+//                LogUtils.LOGM("发音：" + td.phonetic());
+//                LogUtils.LOGM("网络释义：\n" + td.webMeans());
+//                LogUtils.LOGM("音频：\n" + translate.getSpeakUrl());
+
+
+                WordInfo words = new WordInfo(word,td.phonetic(),"翻译结果:"+td.webMeans(),
+                        translate.getSpeakUrl(),"");
                 BaseBeantoobj<WordInfo> wordInfoBaseBeantoobj = new BaseBeantoobj<>(words);
                 wordinfo.postValue(wordInfoBaseBeantoobj);
-                HttpHelper.getInstance().addtWord(token, word, translate.getUsPhonetic(), translate.getTranslations().toString(),
-                        translate.getUSSpeakUrl(), "", new Callback<BaseBean>() {
+                HttpHelper.getInstance().addtWord(token, word, td.phonetic(), td.webMeans(),
+                        translate.getSpeakUrl(), "", new Callback<BaseBean>() {
                             @Override
                             public void onResponse(Call<BaseBean> call, Response<BaseBean> response) {
 

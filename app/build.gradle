@@ -62,4 +62,5 @@ dependencies {
     implementation "com.jakewharton:butterknife:$butterknife_version"
     annotationProcessor "com.jakewharton:butterknife-compiler:$butterknife_version"
     implementation 'androidx.palette:palette:1.0.0'
+    implementation 'com.github.zhaolewei:ZlwAudioRecorder:v1.07'
 }

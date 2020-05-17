@@ -17,7 +17,7 @@ import com.lb.learnsong.BuildConfig;
 public class LogUtils {
   public static String gtag(String tag){
     if (NullUtils.isEmpty(tag)){
-      tag="lb";
+      tag="lblog";
     }
     return tag;
   }
