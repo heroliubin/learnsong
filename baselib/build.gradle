@@ -1,0 +1,61 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 29
+
+
+    defaultConfig {
+        minSdkVersion 21
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles 'consumer-rules.pro'
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+    api 'androidx.appcompat:appcompat:1.1.0'
+    testApi'junit:junit:4.12'
+    androidTestApi 'androidx.test.ext:junit:1.1.1'
+    androidTestApi 'androidx.test.espresso:espresso-core:3.2.0'
+    api fileTree(dir: 'libs', include: ['*.jar'])
+    api 'androidx.appcompat:appcompat:1.1.0'
+    api 'com.google.android.material:material:1.1.0'
+    api 'androidx.constraintlayout:constraintlayout:1.1.3'
+    api 'androidx.navigation:navigation-fragment:2.2.1'
+    api 'androidx.navigation:navigation-ui:2.2.1'
+    api 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+    api 'androidx.legacy:legacy-support-v4:1.0.0'
+    api 'androidx.annotation:annotation:1.1.0'
+    api 'com.github.bumptech.glide:glide:4.11.0'
+    api 'jp.wasabeef:glide-transformations:4.1.0'
+    def retrofitversion="2.8.1"
+    api "com.squareup.retrofit2:retrofit:$retrofitversion"
+    api "com.squareup.retrofit2:converter-gson:$retrofitversion"
+    api "com.squareup.retrofit2:adapter-rxjava2:$retrofitversion"
+    api 'com.squareup.okhttp3:logging-interceptor:3.4.1'
+    def paging_version = "2.1.2"
+    api "androidx.paging:paging-common:$paging_version"
+    api "androidx.paging:paging-runtime:$paging_version"
+    api 'androidx.palette:palette:1.0.0'
+    api 'com.github.zhaolewei:ZlwAudioRecorder:v1.07'
+    def smart_version = "2.0.0"
+    api  "com.scwang.smart:refresh-layout-kernel:$smart_version"
+    api  "com.scwang.smart:refresh-header-classics:$smart_version"
+    api  "com.scwang.smart:refresh-footer-classics:$smart_version"  
+    api 'org.greenrobot:eventbus:3.2.0'
+    def rxversion="3.0.0"
+    api "io.reactivex.rxjava3:rxandroid:$rxversion"
+    api "io.reactivex.rxjava3:rxjava:$rxversion"
+    api 'com.github.tbruyelle:rxpermissions:0.10.2'
+}

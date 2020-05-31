@@ -3,10 +3,10 @@ package com.lb.learnsong.ui.wordlib;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.lb.baselib.viewmodel.BaseViewModel;
 import com.lb.learnsong.bean.BaseListBean;
 import com.lb.learnsong.bean.WordInfo;
 import com.lb.learnsong.http.HttpHelper;
-import com.lb.learnsong.ui.viewmodel.BaseViewModel;
 
 import java.util.List;
 

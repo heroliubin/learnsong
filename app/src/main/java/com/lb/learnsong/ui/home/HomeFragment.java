@@ -9,14 +9,13 @@ import androidx.appcompat.widget.PopupMenu;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.lb.learnsong.R;
 import com.lb.learnsong.bean.Lyrics;
 import com.lb.learnsong.ui.BaseListFragment;
 import com.lb.learnsong.ui.activity.AddSongActivity;
-import com.lb.learnsong.ui.viewmodel.BaseViewModel;
 import com.lb.learnsong.ui.activity.LyricinfoActivity;
-import com.lb.learnsong.ui.lsview.RefreshRecyclerView;
 import com.lb.learnsong.ui.viewmodel.HomeViewModel;
 
 import java.util.List;
@@ -25,7 +24,7 @@ import java.util.List;
 public class HomeFragment extends BaseListFragment {
     private int p = 1;
     private HomeViewModel homeViewModel;
-    private RefreshRecyclerView recyclerView;
+    private RecyclerView recyclerView;
     private HomeAdapter adapter;
     private ImageView addima;
 
@@ -46,13 +45,13 @@ public class HomeFragment extends BaseListFragment {
     @Override
     protected void lazyload() {
         homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
-        homeViewModel.loadData(p, 15, BaseViewModel.TYPE_FRESH);
+        homeViewModel.loadData(p, 15);
         homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<List<Lyrics>>() {
                     @Override
                     public void onChanged(List<Lyrics> data) {
                         adapter = new HomeAdapter(getContext(), data);
                         recyclerView.setAdapter(adapter);
-                        recyclerView.refreshFinish();
+
                         adapter.setItemclicklisenter(p -> {
                             //跳转详情页
 //                            homeViewModel.loadLyricsinfo(getToken(),data.get(p).getId()+"");
@@ -63,20 +62,20 @@ public class HomeFragment extends BaseListFragment {
                     }
                 }
         );
-        recyclerView.setOnPullListener(new RefreshRecyclerView.OnPullListener() {
-            @Override
-            public void onRefresh() {
-                p = 1;
-                homeViewModel.loadData(p, 15, BaseViewModel.TYPE_FRESH);
-
-            }
-
-            @Override
-            public void onLoadMore() {
-                p++;
-                homeViewModel.loadData(p, 10, BaseViewModel.TYPE_MORE);
-            }
-        });
+//        recyclerView.setOnPullListener(new RefreshRecyclerView.OnPullListener() {
+//            @Override
+//            public void onRefresh() {
+//                p = 1;
+//                homeViewModel.loadData(p, 15);
+//
+//            }
+//
+//            @Override
+//            public void onLoadMore() {
+//                p++;
+//                homeViewModel.loadData(p, 10);
+//            }
+//        });
 
     }
 

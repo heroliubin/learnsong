@@ -2,6 +2,7 @@ package com.lb.learnsong.ui.viewmodel;
 
 import androidx.lifecycle.MutableLiveData;
 
+import com.lb.baselib.viewmodel.BaseViewModel;
 import com.lb.learnsong.bean.BaseBean;
 import com.lb.learnsong.http.HttpHelper;
 

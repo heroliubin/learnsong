@@ -12,9 +12,9 @@
         android:layout_height="@dimen/customactionbar_height"
         android:gravity="center"
         android:text="@string/title_home"
-        android:textStyle="bold"
         android:textColor="@color/title_black"
         android:textSize="@dimen/customactionbar_titlesize"
+        android:textStyle="bold"
         app:layout_constrainedHeight="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -37,12 +37,23 @@
         android:background="@color/title_divide"
         app:layout_constraintTop_toBottomOf="@+id/text_home" />
 
-    <com.lb.learnsong.ui.lsview.RefreshRecyclerView
-        android:id="@+id/home_recyclerview"
+    <com.scwang.smart.refresh.layout.SmartRefreshLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/home_divide" />
+        app:layout_constraintTop_toBottomOf="@+id/home_divide">
+        <com.scwang.smart.refresh.header.ClassicsHeader
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/home_recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+        <com.scwang.smart.refresh.footer.ClassicsFooter
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </com.scwang.smart.refresh.layout.SmartRefreshLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

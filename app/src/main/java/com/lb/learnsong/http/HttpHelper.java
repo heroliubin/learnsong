@@ -22,6 +22,7 @@ import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
@@ -32,20 +33,12 @@ import retrofit2.http.Path;
 
 public class HttpHelper {
     private Retrofit retrofit;
-//    private volatile static HttpHelper instance;
     public static class HttpHelperHolder{
         public static HttpHelper intance=new HttpHelper();
     }
 
     public static HttpHelper getInstance() {
-//        if (instance == null) {
-//            synchronized (HttpHelper.class) {
-//                if (instance == null) {
-//                    instance = new HttpHelper();
-//                }
-//            }
-//        }
-//        return instance;
+
         return HttpHelperHolder.intance;
     }
 
@@ -55,6 +48,7 @@ public class HttpHelper {
         retrofit = new Retrofit.Builder().baseUrl(url).
                 client(new OkHttpClient.Builder().addInterceptor(logging).build()).
                 addConverterFactory(GsonConverterFactory.create()).
+                addCallAdapterFactory(RxJava2CallAdapterFactory.create()).
                 build();
 
     }

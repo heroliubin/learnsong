@@ -4,11 +4,12 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.lb.baselib.viewmodel.BaseViewModel;
 import com.lb.learnsong.bean.BaseBean;
 import com.lb.learnsong.bean.BaseBeantoobj;
 import com.lb.learnsong.bean.UserInfo;
 import com.lb.learnsong.http.HttpHelper;
-import com.lb.learnsong.ui.viewmodel.BaseViewModel;
+
 
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;

@@ -7,6 +7,8 @@ import android.provider.MediaStore;
 
 import androidx.lifecycle.MutableLiveData;
 
+import com.lb.baselib.model.FailModel;
+import com.lb.baselib.viewmodel.BaseViewModel;
 import com.lb.learnsong.bean.BaseBean;
 import com.lb.learnsong.http.HttpHelper;
 
@@ -43,7 +45,7 @@ public class UtilViewModel extends BaseViewModel {
 
             @Override
             public void onFailure(Call<BaseBean> call, Throwable t) {
-
+                getFailData().setValue(new FailModel());
             }
         });
     }
