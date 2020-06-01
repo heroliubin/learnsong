@@ -1,7 +1,15 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.jakewharton.butterknife'
 android {
-
+//    signingConfigs {
+//        debug {
+//            storeFile file('C:\\Users\\Public\\key\\learnsong.keystore')
+//            storePassword 'liubin754891'
+//            keyAlias = 'lb'
+//            keyPassword 'liubin754891'
+//        }
+//
+//    }
     sourceSets.main.jniLibs.srcDirs = ['libs']
     compileSdkVersion 29
     compileOptions {

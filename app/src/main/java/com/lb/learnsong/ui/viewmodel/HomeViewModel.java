@@ -10,9 +10,12 @@ import com.lb.learnsong.bean.BaseBeantoobj;
 import com.lb.learnsong.bean.BaseListBean;
 import com.lb.learnsong.bean.Lyrics;
 import com.lb.learnsong.bean.LyricsInfo;
+import com.lb.learnsong.http.Homeservice;
 import com.lb.learnsong.http.HttpHelper;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -27,16 +30,18 @@ public class HomeViewModel extends BaseViewModel {
 
     public HomeViewModel() {
         data = new MutableLiveData<>();
-
     }
-
     public void loadData(int p, int c) {
-        HttpHelper.getInstance().getHomeData(p, c, new Callback<BaseListBean<Lyrics>>(){
+        Map<String, String> map = new HashMap<>();
+        map.put("page", p + "");
+        map.put("count", c + "");
+        Homeservice service = HttpHelper.getInstance().initservice(Homeservice.class);
+        service.execute(map).enqueue(new Callback<BaseListBean<Lyrics>>() {
             @Override
             public void onResponse(Call<BaseListBean<Lyrics>> call, Response<BaseListBean<Lyrics>> response) {
 
-                if (!response.isSuccessful()){
-                    getFailData().setValue(new FailModel("网络错误","",1));
+                if (!response.isSuccessful()) {
+                    getFailData().setValue(new FailModel("网络错误", "", 1));
                     return;
                 }
                 if (response.body().getList() != null && response.body().getList().size() > 0) {
@@ -45,15 +50,15 @@ public class HomeViewModel extends BaseViewModel {
 
                     data.setValue(dataList);
 
-                }else {
-                    getFailData().setValue(new FailModel("无数据","",1));
+                } else {
+                    getFailData().setValue(new FailModel("无数据", "", 1));
                 }
 
             }
 
             @Override
             public void onFailure(Call<BaseListBean<Lyrics>> call, Throwable t) {
-                getFailData().setValue(new FailModel("网络错误","",1));
+                getFailData().setValue(new FailModel("网络错误", "", 1));
             }
 
         });

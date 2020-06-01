@@ -55,21 +55,12 @@ public class HttpHelper {
 
     private String url = "http://120.24.185.40//app/";
 
-    /**
-     * 首页数据
-     */
-    interface GetHomeService {
-        @FormUrlEncoded
-        @POST("music/getHomePage")
-        Call<BaseListBean<Lyrics>> execute(@Field("page") String page, @Field("count") String count);
 
+    public <T> T initservice(Class<T> service){
+        return retrofit.create(service);
     }
 
 
-    public void getHomeData(int p, int c, Callback<BaseListBean<Lyrics>> callback) {
-        GetHomeService service = retrofit.create(GetHomeService.class);
-        service.execute(p + "", c + "").enqueue(callback);
-    }
 
     /**
      * 注册
