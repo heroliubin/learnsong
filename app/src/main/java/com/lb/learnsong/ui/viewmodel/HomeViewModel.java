@@ -4,6 +4,7 @@ package com.lb.learnsong.ui.viewmodel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.lb.baselib.model.FailModel;
 import com.lb.baselib.viewmodel.BaseViewModel;
 import com.lb.learnsong.bean.BaseBeantoobj;
 import com.lb.learnsong.bean.BaseListBean;
@@ -33,7 +34,9 @@ public class HomeViewModel extends BaseViewModel {
         HttpHelper.getInstance().getHomeData(p, c, new Callback<BaseListBean<Lyrics>>(){
             @Override
             public void onResponse(Call<BaseListBean<Lyrics>> call, Response<BaseListBean<Lyrics>> response) {
+
                 if (!response.isSuccessful()){
+                    getFailData().setValue(new FailModel("网络错误","",1));
                     return;
                 }
                 if (response.body().getList() != null && response.body().getList().size() > 0) {
@@ -42,13 +45,15 @@ public class HomeViewModel extends BaseViewModel {
 
                     data.setValue(dataList);
 
+                }else {
+                    getFailData().setValue(new FailModel("无数据","",1));
                 }
 
             }
 
             @Override
             public void onFailure(Call<BaseListBean<Lyrics>> call, Throwable t) {
-
+                getFailData().setValue(new FailModel("网络错误","",1));
             }
 
         });

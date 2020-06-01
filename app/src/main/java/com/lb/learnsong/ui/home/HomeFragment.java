@@ -4,20 +4,28 @@ import android.content.Intent;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.lb.baselib.model.FailModel;
 import com.lb.learnsong.R;
 import com.lb.learnsong.bean.Lyrics;
 import com.lb.learnsong.ui.BaseListFragment;
 import com.lb.learnsong.ui.activity.AddSongActivity;
 import com.lb.learnsong.ui.activity.LyricinfoActivity;
 import com.lb.learnsong.ui.viewmodel.HomeViewModel;
+import com.scwang.smart.refresh.layout.SmartRefreshLayout;
+import com.scwang.smart.refresh.layout.api.RefreshLayout;
+import com.scwang.smart.refresh.layout.listener.OnLoadMoreListener;
+import com.scwang.smart.refresh.layout.listener.OnRefreshListener;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -27,11 +35,14 @@ public class HomeFragment extends BaseListFragment {
     private RecyclerView recyclerView;
     private HomeAdapter adapter;
     private ImageView addima;
+    private List<Lyrics> listdata;
+    private SmartRefreshLayout refreshLayout;
 
     @Override
     protected void initView(View root) {
         recyclerView = root.findViewById(R.id.home_recyclerview);
         addima = root.findViewById(R.id.home_adaimg);
+        refreshLayout = root.findViewById(R.id.smrtrefreshlayout);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
         addima.setOnClickListener(v -> showPopMenu(v));
@@ -45,38 +56,51 @@ public class HomeFragment extends BaseListFragment {
     @Override
     protected void lazyload() {
         homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
-        homeViewModel.loadData(p, 15);
+        homeViewModel.loadData(p, 10);
+        listdata = new ArrayList<>();
+        adapter = new HomeAdapter(getContext(), listdata);
+        recyclerView.setAdapter(adapter);
+        adapter.setItemclicklisenter(p -> {
+            Intent intent = new Intent(getActivity(), LyricinfoActivity.class);
+            intent.putExtra("id", listdata.get(p).getId() + "");
+            startActivity(intent);
+        });
         homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<List<Lyrics>>() {
                     @Override
                     public void onChanged(List<Lyrics> data) {
-                        adapter = new HomeAdapter(getContext(), data);
-                        recyclerView.setAdapter(adapter);
-
-                        adapter.setItemclicklisenter(p -> {
-                            //跳转详情页
-//                            homeViewModel.loadLyricsinfo(getToken(),data.get(p).getId()+"");
-                            Intent intent = new Intent(getActivity(), LyricinfoActivity.class);
-                            intent.putExtra("id", data.get(p).getId() + "");
-                            startActivity(intent);
-                        });
+                        refreshLayout.finishLoadMore();
+                        refreshLayout.finishRefresh();
+                        listdata.addAll(data);
+                        adapter.notifyDataSetChanged();
                     }
                 }
         );
-//        recyclerView.setOnPullListener(new RefreshRecyclerView.OnPullListener() {
-//            @Override
-//            public void onRefresh() {
-//                p = 1;
-//                homeViewModel.loadData(p, 15);
-//
-//            }
-//
-//            @Override
-//            public void onLoadMore() {
-//                p++;
-//                homeViewModel.loadData(p, 10);
-//            }
-//        });
-
+        homeViewModel.getFailData().observe(getViewLifecycleOwner(), new Observer<FailModel>() {
+            @Override
+            public void onChanged(FailModel failModel) {
+                refreshLayout.finishLoadMore();
+                refreshLayout.finishRefresh();
+                if (p>1){
+                    p--;
+                }
+                Toast.makeText(getActivity(),failModel.getMsg(),Toast.LENGTH_SHORT).show();
+            }
+        });
+        refreshLayout.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+                p = 1;
+                listdata.clear();
+                homeViewModel.loadData(p, 10);
+            }
+        });
+        refreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
+            @Override
+            public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
+                p++;
+                homeViewModel.loadData(p,10);
+            }
+        });
     }
 
     public void showPopMenu(View view) {
@@ -87,19 +111,19 @@ public class HomeFragment extends BaseListFragment {
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.add_singer:
-                        Intent intent=new Intent(getActivity(), AddSongActivity.class);
-                        intent.putExtra("type","singer");
+                        Intent intent = new Intent(getActivity(), AddSongActivity.class);
+                        intent.putExtra("type", "singer");
                         startActivity(intent);
                         break;
 
                     case R.id.add_lyric:
-                        Intent intent1=new Intent(getActivity(), AddSongActivity.class);
-                        intent1.putExtra("type","lyric");
+                        Intent intent1 = new Intent(getActivity(), AddSongActivity.class);
+                        intent1.putExtra("type", "lyric");
                         startActivity(intent1);
                         break;
                     case R.id.add_album:
-                        Intent intent2=new Intent(getActivity(), AddSongActivity.class);
-                        intent2.putExtra("type","album");
+                        Intent intent2 = new Intent(getActivity(), AddSongActivity.class);
+                        intent2.putExtra("type", "album");
                         startActivity(intent2);
                         break;
 
